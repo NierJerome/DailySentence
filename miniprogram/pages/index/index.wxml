@@ -1,15 +1,9 @@
 <!--index.wxml-->
 <view class="container">
-
-  <!-- 用户 openid -->
-  <view class="userinfo">
-    <open-data type="userNickName"></open-data>
-    <open-data type="userAvatarUrl"></open-data>
-    <view class="userinfo-nickname-wrapper">
-      <button class="userinfo-nickname" bindtap="getUserProfile">点击获取 openid</button>
-    </view>
-  </view>
-
-
-  <!-- <button open-type="getUserInfo" bindgetuserinfo="getuserinfo">授权</button> 已过时 -->
+  <swiper class="screen-swiper {{DotStyle?'square-dot':'round-dot'}} swiper" indicator-dots="{{false}}" circular="{{false}}"
+    autoplay="{{false}}" interval="5000" duration="500">
+    <swiper-item wx:for="{{swiperList}}" wx:key='index'>
+      <image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
+    </swiper-item>
+  </swiper>
 </view>

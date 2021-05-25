@@ -41,7 +41,6 @@ exports.main = async (event, context) => {
     },
     json: true // Automatically parses the JSON string in the response
   }
-  cloud.session_key = "1"
   
   console.log(cloud.session_key);
   return await rp(options)

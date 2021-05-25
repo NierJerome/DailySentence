@@ -1,6 +1,8 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/index/index",
+    "pages/mine/index",
+    "pages/recordlist/index"
   ],
   "window": {
     "navigationStyle": "custom",
@@ -9,6 +11,19 @@
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "云开发 QuickStart",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "custom": true,
+    "list": [{
+      "pagePath": "pages/mine/index",
+      "text": "记录"
+    }, {
+      "pagePath": "pages/index/index",
+      "text": "每日一句"
+    }, {
+      "pagePath": "pages/recordlist/index",
+      "text": "我的"
+    }]
   },
   "sitemapLocation": "sitemap.json",
   "style": "v2"
