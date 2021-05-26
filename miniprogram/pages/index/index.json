@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "swiper-screen": "../../components/swiper-screen/index",
+    "item-view": "./item/item-view"
+  }
 }

@@ -1,9 +1,18 @@
 <!--index.wxml-->
 <view class="container">
-  <swiper class="screen-swiper {{DotStyle?'square-dot':'round-dot'}} swiper" indicator-dots="{{false}}" circular="{{false}}"
-    autoplay="{{false}}" interval="5000" duration="500">
-    <swiper-item wx:for="{{swiperList}}" wx:key='index'>
+  <!-- <swiper class="screen-swiper {{DotStyle?'square-dot':'round-dot'}} swiper" indicator-dots="{{false}}" circular="{{false}}" current="{{current}}" bindchange="handleSwiperChange"
+    >
+    <swiper-item wx:for="{{swiperList}}" wx:key='s'>
       <image src="{{item.url}}" mode="aspectFill" wx:if="{{item.type=='image'}}"></image>
+      <view>GG</view>
     </swiper-item>
-  </swiper>
+  </swiper> -->
+  <swiper-screen id="swiper" generic:item-view="item-view" swiperHeight="{{swiperHeight}}"
+    swiperDuration="{{swiperDuration}}" list="{{list}}" current="{{current}}" bindchange="swiperChange"></swiper-screen>
+  <view class="tab prev" catchtap="onClickLast">
+    <icon class="iconfont icon-xiangzuo" style="font-size:60rpx"></icon>
+  </view>
+  <view class="tab next" catchtap="onClickNext">
+    <icon class="iconfont icon-xuanzeqixiayige" style="font-size:60rpx"></icon>
+  </view>
 </view>

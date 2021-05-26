@@ -1,0 +1,11 @@
+<!--components/swiper-screen/index.wxml-->
+<swiper 
+  style="height:{{swiperHeight}}px" 
+  duration="{{swiperDuration}}" 
+  current="{{swiperCurrent}}" 
+  bindchange="swiperChange" 
+  circular>
+  <swiper-item wx:key="sss" wx:for="{{swiperList}}">
+    <item-view item="{{item}}" swiperHeight="{{swiperHeight}}"></item-view>
+  </swiper-item>
+</swiper>

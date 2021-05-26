@@ -1,0 +1,16 @@
+<!--pages/index/item/item-view.wxml-->
+<view class="main" style="height:{{swiperHeight}}px">
+  <view class="content">
+    <view class="date">
+      <view class="week">2021.5 星期二</view>
+      <!-- <view class="day">25</view> -->
+      <view class="day">{{item.index}}</view>
+      <view class="lunar">农历四月十四</view>
+    </view>
+    <view class="line" style="margin-bottom:30rpx;flex:none"></view>
+    <view class="sentence">
+      <view class="text">A good beginning makes a good ending.</view>
+      <view class="translation">良好的开端就是成功的一半。</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,61 @@
+/* pages/index/item/item-view.wxss */
+.main {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+}
+
+.main>.content {
+  width: 70%;
+  height: 800rpx;
+  border: 2px solid white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.main>.content>view {
+  flex: 1;
+}
+
+.date {
+  text-align: center;
+
+}
+
+.date>.week {
+  margin-top: 80rpx;
+}
+
+.date>.day {
+  margin: 30rpx 0;
+  font-size: 120rpx;
+}
+
+/* .date>.lunar{
+} */
+
+.sentence {
+  position: relative;
+  width: 80%;
+}
+
+.sentence::before{
+  position: absolute;
+  top: 0;
+  content: '每日一句';
+  display: block;
+  padding: 3rpx 9rpx;
+  font-size: 26rpx;
+  color: #000;
+  background: #fff;
+  border-radius: 5rpx;  
+}
+
+.sentence> .text{
+  margin-top: 60rpx;
+  letter-spacing: normal;
+}

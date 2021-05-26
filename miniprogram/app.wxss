@@ -1,3 +1,17 @@
 @import "./colorui/icon.wxss";
-@import "./colorui/icon.wxss";
+@import "./colorui/main.wxss";
+@import "./assets/font/font.wxss";
+@import "./assets/icon/icon.wxss";
 
+page {
+  color: white;
+  font-family: DIN;
+  font-size: 30rpx;
+  letter-spacing: 1px;
+}
+
+.line {
+  height: 1px;
+  width: 80%;
+  background-color: white;
+}
