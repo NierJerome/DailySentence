@@ -24,7 +24,7 @@ function getImage() {
     json: true
   }
   let imageUrl = rp(options).then((res) => {
-    return res[0].urls.small
+    return res[0].urls.regular
   }).catch((err) => {
     console.log(err);
   })
@@ -38,7 +38,7 @@ function getSentence() {
 
 exports.main = async (event) => {
   // 判断是否传入了必填值（_id）
-  if (event.id) {
+  if (!event.id) {
     return {
       errorInfo: "新增记录需要[id]"
     }
@@ -47,20 +47,16 @@ exports.main = async (event) => {
   const imageurl = await getImage()
   //存入数据库
   const data = {
-    _id: event.id + 1,
+    id: event.id + 1,
     date: Date.now(),
     text: "",
     translation: "",
     imageUrl: imageurl,
   }
-  db.collection('data')
+  return await db.collection('data')
     .add({
       data: data
+    }).then((res) => {
+      return {res,data}
     })
-  //查询数据库，返回
-
-  return {
-    message: "成功添加",
-    newItem: data
-  }
 }

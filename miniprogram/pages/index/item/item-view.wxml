@@ -1,10 +1,11 @@
 <!--pages/index/item/item-view.wxml-->
 <view class="main" style="height:{{swiperHeight}}px">
-  <view class="content">
+  <image class="bg" style="height:{{swiperHeight}}px" src="{{item.imageUrl}}" mode="aspectFill" ></image>
+  <view class="content" wx:if="{{item}}">
     <view class="date">
-      <view class="week">2021.5 星期二</view>
+      <view class="week">{{item.month}} {{item.day}}</view>
       <!-- <view class="day">25</view> -->
-      <view class="day">{{item.index}}</view>
+      <view class="day">{{item.date}}</view>
       <view class="lunar">农历四月十四</view>
     </view>
     <view class="line" style="margin-bottom:30rpx;flex:none"></view>

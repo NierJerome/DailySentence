@@ -56,14 +56,43 @@ Page({
   },
   getDailyList() {
     let _this = this
-    let dailyList = []
-    for (let i = 0; i < 6; i++) {
-      let item = {}
-      item.index = i
-      item.total = 6
-      dailyList.push(item)
-    }
-
+    let list = wx.getStorageSync('dataList')
+    console.log(list);
+    let dailyList = list.map((item, index, array) => {
+      let time = new Date(item.date)
+      let day
+      switch (time.getDay()) {
+        case 1:
+          day = "星期一"
+          break;
+        case 2:
+          day = "星期二"
+          break;
+        case 3:
+          day = "星期三"
+          break;
+        case 4:
+          day = "星期四"
+          break;
+        case 5:
+          day = "星期五"
+          break;
+        case 6:
+          day = "星期六"
+          break;
+        case 7:
+          day = "星期七"
+          break;
+      }
+      return {
+        month: `${time.getFullYear()}.${time.getMonth() + 1}`,
+        day:day,
+        date:time.getDate(),
+        imageUrl:item.imageUrl,
+        index: index,
+        total: array.length
+      }
+    })
     // 初始化需要三步
     // 初始化setData后，需要调用swiper组件的init方法
     // 初始化真实索引
@@ -73,7 +102,7 @@ Page({
     })
 
     // 每次都将进入最新一天 当前是必须为索引，实际需要 -1
-    _this.selectComponent('#swiper').init(5);
+    _this.selectComponent('#swiper').init(list.length - 1);
     // 初始化后再把动画弄出来，否则初始的current不是0，界面会自动跳动到当前位置，体验不太好
     _this.setData({
       swiperDuration: '250'
@@ -91,16 +120,16 @@ Page({
     })
     if (current == NO_PREV_PAGE) {
       wx.showToast({
-        title: "已经是第一题了",
+        title: "没有了哦",
         icon: "none"
       })
       return
     }
 
     if (current == NO_NEXT_PAGE) {
-      wx.showModal({
-        title: "提示",
-        content: "您已经答完所有题，是否退出？",
+      wx.showToast({
+        title: "期待明天吗？",
+        icon: "none"
       })
       return
     }

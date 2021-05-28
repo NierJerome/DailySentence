@@ -7,6 +7,10 @@
   background-color: black;
 }
 
+.bg{
+  position: absolute;
+}
+
 .main>.content {
   width: 70%;
   height: 800rpx;
@@ -15,6 +19,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  z-index: 1;
 }
 
 .main>.content>view {
@@ -59,3 +64,4 @@
   margin-top: 60rpx;
   letter-spacing: normal;
 }
+

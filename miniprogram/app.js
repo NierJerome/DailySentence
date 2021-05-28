@@ -55,9 +55,8 @@ App({
 
     // 判断本地缓存是否有数据
     let dataList = wx.getStorageSync('dataList')
-    console.log(dataList);
     if (dataList.length) {
-    // if (0) {
+      // if (0) {
       // 判断是否更新数据 使用缓存数据判断
       let lastItem = dataList[dataList.length - 1]
       // let lastItem = {
@@ -77,7 +76,8 @@ App({
       let row = await db.collection('data').skip(ct.total - 1).get()
       if (!tools.isNewDate(row.data[0].date)) {
         // 更新
-        await this.updateData(row.data[0])
+        let a = await this.updateData(row.data[0])
+        console.log(a);
         // 获取
         list = await this.getData()
       } else {
@@ -92,20 +92,17 @@ App({
   },
 
   // 更新数据
-  updateData(row) {
+  async updateData(row) {
     // 更新数据
-    wx.cloud.callFunction({
+   return await wx.cloud.callFunction({
       name: 'addData',
       data: {
         id: row.id,
       },
-      success: (res) => {
-        console.log("更新成功");
-      },
-      fail: (err) => {
-        console.log("更新失败", err);
-      }
+    }).then((res)=>{
+      return res
     })
+
   },
 
   // 获取数据
@@ -114,7 +111,7 @@ App({
     // 数据库
     const db = wx.cloud.database()
     return db.collection('data')
-      .orderBy('_id', 'asc')
+      .orderBy('id', 'asc')
       .get()
       .then(res => {
         return res.data
