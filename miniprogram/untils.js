@@ -20,18 +20,35 @@ const formatChsTime = date => {
   return `${year}年${month}月${day}日 ${hour}时${minute}分`
 }
 
+// const getDateUnix = date => {
+//   const year = date.getFullYear()
+//   const month = date.getMonth() + 1
+//   const day = date.getDate()
+
+//   return new Date(`${year}-${month}-${day}`)
+
+// }
+
 const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : `0${n}`
 }
 
-const isNewDate = date => {
-  date = 1622304000;
-  let currentDate = ((new Date().getTime()).toString()).slice()
-  console.log(currentDate);
-  // if (condition) {
+const isNewDate = (date) => {
+  //检测是否传值
+  if (!date) {
+    return
+  }
+  date = new Date(Number(date));
+  let currentDate = new Date()
+  if (`${date.getFullYear()}${date.getMonth()}${date.getDate()}` == `${currentDate.getFullYear()}${currentDate.getMonth()}${currentDate.getDate()}`) {
+    console.log("今天", `${date.getFullYear()}${date.getMonth()}${date.getDate()}`);
+    return 1
+  } else {
+    console.log("不是今天", `${date.getFullYear()}${date.getMonth()}${date.getDate()}`);
+    return 0
+  }
 
-  // }
 }
 
 module.exports = {

@@ -13,8 +13,8 @@ App({
         env: 'dev-cloud-4gsfo39c022ee2d2',
         traceUser: true,
       })
-    }
 
+    }
     // wx.login({
     //   timeout: 30000,
     //   success: (res) => {
@@ -48,11 +48,79 @@ App({
 
   },
 
-  getSentenceData() {
-    tools.isNewDate()
-    // 判断本地缓存是否有数据
+  // 获取数据
+  async getSentenceData() {
+    let list = []
+    const db = wx.cloud.database()
 
-    // 检测最新一条数据的日期
+    // 判断本地缓存是否有数据
+    let dataList = wx.getStorageSync('dataList')
+    console.log(dataList);
+    if (dataList.length) {
+    // if (0) {
+      // 判断是否更新数据 使用缓存数据判断
+      let lastItem = dataList[dataList.length - 1]
+      // let lastItem = {
+      //   date: 1621650972
+      // }
+      if (!tools.isNewDate(lastItem.date)) {
+        await this.updateData(lastItem)
+        // 获取
+        list = await this.getData()
+      } else {
+        return
+      }
+    } else {
+      // 第一次进入/清除缓存进入
+      // 判断是否更新数据 使用数据库数据判断
+      let ct = await db.collection('data').count()
+      let row = await db.collection('data').skip(ct.total - 1).get()
+      if (!tools.isNewDate(row.data[0].date)) {
+        // 更新
+        await this.updateData(row.data[0])
+        // 获取
+        list = await this.getData()
+      } else {
+        //直接获取
+        list = await this.getData()
+      }
+
+    }
+
+    wx.setStorageSync('dataList', list)
+    return list
+  },
+
+  // 更新数据
+  updateData(row) {
+    // 更新数据
+    wx.cloud.callFunction({
+      name: 'addData',
+      data: {
+        id: row.id,
+      },
+      success: (res) => {
+        console.log("更新成功");
+      },
+      fail: (err) => {
+        console.log("更新失败", err);
+      }
+    })
+  },
+
+  // 获取数据
+  getData() {
+    // wx.cloud.callFunction({name:'getData'}) [云函数]
+    // 数据库
+    const db = wx.cloud.database()
+    return db.collection('data')
+      .orderBy('_id', 'asc')
+      .get()
+      .then(res => {
+        return res.data
+      }).catch((err) => {
+        console.log('获取失败', err);
+      })
   },
 
   // 初始化数据
