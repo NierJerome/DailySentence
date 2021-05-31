@@ -16,36 +16,10 @@ Page({
   async getDailyList(list) {
     let _this = this
     let dailyList = list.map((item, index, array) => {
-      let time = new Date(item.date)
-      let day
-      switch (time.getDay()) {
-        case 1:
-          day = "星期一"
-          break;
-        case 2:
-          day = "星期二"
-          break;
-        case 3:
-          day = "星期三"
-          break;
-        case 4:
-          day = "星期四"
-          break;
-        case 5:
-          day = "星期五"
-          break;
-        case 6:
-          day = "星期六"
-          break;
-        case 7:
-          day = "星期七"
-          break;
-      }
+      
+      
       return {
-        month: `${time.getFullYear()}.${time.getMonth() + 1}`,
-        day: day,
-        date: time.getDate(),
-        imageUrl: item.imageUrl,
+        ...item,
         index: index,
         total: array.length
       }
@@ -66,7 +40,7 @@ Page({
     })
 
     // 全局记一下list, 答题卡页暂时就直接用了
-    app.globalData.dailyList = dailyList
+    // app.globalData.dailyList = dailyList
   },
 
   swiperChange(e) {
@@ -85,7 +59,7 @@ Page({
 
     if (current == NO_NEXT_PAGE) {
       wx.showToast({
-        title: "期待明天吗？",
+        title: "没有了哦",
         icon: "none"
       })
       return

@@ -1,17 +1,18 @@
 <!--pages/index/item/item-view.wxml-->
 <view class="main" style="height:{{swiperHeight}}px">
   <image class="bg" style="height:{{swiperHeight}}px" src="{{item.imageUrl}}" mode="aspectFill" ></image>
+  <view class="opacityBg"></view>
   <view class="content" wx:if="{{item}}">
     <view class="date">
-      <view class="week">{{item.month}} {{item.day}}</view>
+      <view class="week">{{item.yearAndMonth}} {{item.day}}</view>
       <!-- <view class="day">25</view> -->
       <view class="day">{{item.date}}</view>
-      <view class="lunar">农历四月十四</view>
+      <view class="lunar">农历{{item.lunar}}</view>
     </view>
     <view class="line" style="margin-bottom:30rpx;flex:none"></view>
     <view class="sentence">
-      <view class="text">A good beginning makes a good ending.</view>
-      <view class="translation">良好的开端就是成功的一半。</view>
+      <view class="text">{{item.text}}</view>
+      <view class="translation">{{item.translation}}</view>
     </view>
   </view>
 </view>

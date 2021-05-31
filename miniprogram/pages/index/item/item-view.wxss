@@ -7,19 +7,30 @@
   background-color: black;
 }
 
-.bg{
+.bg {
   position: absolute;
+
+}
+
+.opacityBg {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: hsla(0, 0%, 0%, 0.2);
+  z-index: 1;
 }
 
 .main>.content {
   width: 70%;
-  height: 800rpx;
+  height: 900rpx;
   border: 2px solid white;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  z-index: 1;
+  z-index: 2;
 }
 
 .main>.content>view {
@@ -48,7 +59,7 @@
   width: 80%;
 }
 
-.sentence::before{
+.sentence::before {
   position: absolute;
   top: 0;
   content: '每日一句';
@@ -57,11 +68,14 @@
   font-size: 26rpx;
   color: #000;
   background: #fff;
-  border-radius: 5rpx;  
+  border-radius: 5rpx;
 }
 
-.sentence> .text{
+.sentence>.text {
   margin-top: 60rpx;
   letter-spacing: normal;
 }
 
+.sentence>.translation {
+  margin-top: 20rpx;
+}

@@ -43,10 +43,8 @@ const isNewDate = (date) => {
   date = new Date(Number(date));
   let currentDate = new Date()
   if (`${date.getFullYear()}${date.getMonth()}${date.getDate()}` == `${currentDate.getFullYear()}${currentDate.getMonth()}${currentDate.getDate()}`) {
-    console.log("今天", `${date.getFullYear()}${date.getMonth()}${date.getDate()}`);
     return 1
   } else {
-    console.log("不是今天", `${date.getFullYear()}${date.getMonth()}${date.getDate()}`);
     return 0
   }
 

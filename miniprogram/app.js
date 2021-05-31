@@ -43,8 +43,8 @@ App({
     // })
 
 
-    let list = this.getSentenceData()
-    wx.setStorageSync('dataList', list)
+    // let list = this.getSentenceData()
+    // wx.setStorageSync('dataList', list)
   },
 
 
@@ -63,7 +63,7 @@ App({
       // let lastItem = {
       //   date: 1621650972
       // }
-      if (!tools.isNewDate(lastItem.date)) {
+      if (!tools.isNewDate(lastItem.time)) {
         await this.updateData(lastItem)
         // 获取
         list = await this.getData()
@@ -75,7 +75,7 @@ App({
       // 判断是否更新数据 使用数据库数据判断
       let ct = await db.collection('data').count()
       let row = await db.collection('data').skip(ct.total - 1).get()
-      if (!tools.isNewDate(row.data[0].date)) {
+      if (!tools.isNewDate(row.data[0].time)) {
         // 更新
         let a = await this.updateData(row.data[0])
         console.log(a);
