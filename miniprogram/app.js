@@ -43,10 +43,11 @@ App({
     // })
 
 
-    this.getSentenceData()
-
-
+    let list = this.getSentenceData()
+    wx.setStorageSync('dataList', list)
   },
+
+
 
   // 获取数据
   async getSentenceData() {
@@ -87,19 +88,23 @@ App({
 
     }
 
-    wx.setStorageSync('dataList', list)
+    this.setDataStorage(list)
     return list
+  },
+  // 设置缓存
+  setDataStorage(tempList) {
+    wx.setStorageSync('dataList', tempList)
   },
 
   // 更新数据
   async updateData(row) {
     // 更新数据
-   return await wx.cloud.callFunction({
+    return await wx.cloud.callFunction({
       name: 'addData',
       data: {
         id: row.id,
       },
-    }).then((res)=>{
+    }).then((res) => {
       return res
     })
 
