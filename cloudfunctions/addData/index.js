@@ -15,7 +15,6 @@ function getImage() {
   let options = {
     uri: 'https://api.unsplash.com/photos/random',
     qs: {
-      // client_id: "JBW8EBoI6WSb4C-ijGp86f1_myYbT-Z3gdJjoovbKR8",
       count: 1,
     },
     headers: {
@@ -109,29 +108,23 @@ const getTime = time => {
     fullDate_2: `${year}-${month>9?month:'0'+month}-${date>9?date:'0'+date}`,
     date: date
   }
-  // return `${[year, month, day].map(formatNumber).join('-')}`
 }
 
 
-exports.main = async (event) => {
+exports.main = async () => {
   const time = new Date()
   const cTime = await getTime(time)
-  // 判断是否传入了必填值（_id）
-  if (!event.id) {
-    return {
-      errorInfo: "新增记录需要[id]"
-    }
-  }
+  // 获取数据id
+  const ct = await db.collection('data').count()
+  const row = await db.collection('data').skip(ct.total - 1).get()
 
-
-
-  //根据传入的时间获取图片，句子
+  //根据最新时间获取图片，句子
   const imageurl = await getImage()
   const lunarcalendar = await getLunar(cTime.fullDate)
   const record = await getSentence(cTime.fullDate_2)
   //存入数据库
   const data = {
-    id: event.id + 1,
+    id: row.data[0].id + 1,
     time: Date.now(),
     yearAndMonth: cTime.yearAndMonth,
     day: cTime.day,

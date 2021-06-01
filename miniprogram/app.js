@@ -60,32 +60,15 @@ App({
       // if (0) {
       // 判断是否更新数据 使用缓存数据判断
       let lastItem = dataList[dataList.length - 1]
-      // let lastItem = {
-      //   date: 1621650972
-      // }
+
       if (!tools.isNewDate(lastItem.time)) {
-        await this.updateData(lastItem)
-        // 获取
         list = await this.getData()
       } else {
         return
       }
     } else {
       // 第一次进入/清除缓存进入
-      // 判断是否更新数据 使用数据库数据判断
-      let ct = await db.collection('data').count()
-      let row = await db.collection('data').skip(ct.total - 1).get()
-      if (!tools.isNewDate(row.data[0].time)) {
-        // 更新
-        let a = await this.updateData(row.data[0])
-        console.log(a);
-        // 获取
-        list = await this.getData()
-      } else {
-        //直接获取
-        list = await this.getData()
-      }
-
+      list = await this.getData()
     }
 
     this.setDataStorage(list)
@@ -94,20 +77,6 @@ App({
   // 设置缓存
   setDataStorage(tempList) {
     wx.setStorageSync('dataList', tempList)
-  },
-
-  // 更新数据
-  async updateData(row) {
-    // 更新数据
-    return await wx.cloud.callFunction({
-      name: 'addData',
-      data: {
-        id: row.id,
-      },
-    }).then((res) => {
-      return res
-    })
-
   },
 
   // 获取数据
