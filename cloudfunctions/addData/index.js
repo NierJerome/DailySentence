@@ -7,9 +7,6 @@ cloud.init({
 })
 
 const rp = require('request-promise');
-const {
-  formatTime
-} = require('../../miniprogram/untils');
 const db = cloud.database();
 // 云函数入口函数
 
