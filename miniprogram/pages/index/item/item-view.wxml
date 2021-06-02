@@ -1,6 +1,7 @@
 <!--pages/index/item/item-view.wxml-->
 <view class="main" style="height:{{swiperHeight}}px">
-  <image class="bg" style="height:{{swiperHeight}}px" src="{{item.imageUrl}}" mode="aspectFill" ></image>
+
+  <image class="bg" style="height:{{swiperHeight}}px" src="{{item.imageUrl}}" mode="aspectFill"></image>
   <view class="opacityBg"></view>
   <view class="content" wx:if="{{item}}">
     <view class="date">
@@ -14,5 +15,6 @@
       <view class="text">{{item.text}}</view>
       <view class="translation">{{item.translation}}</view>
     </view>
+    <view class="sign animation-{{animation}}" id="container" bindtap="handleSign">打卡</view>
   </view>
 </view>

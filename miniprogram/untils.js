@@ -50,9 +50,27 @@ const isNewDate = (date) => {
 
 }
 
+// 节流函数
+
+function throttle(func, gapTime) {
+  if (gapTime == null || gapTime == undefined) {
+    gapTime == 1500
+  }
+
+  let _lastTime = null
+  return function () {
+    let _nowTime = +new Date()
+    if (_nowTime - _lastTime > gapTime || _lastTime) {
+      func()
+      _lastTime = _nowTime
+    }
+  }
+}
+
 module.exports = {
   formatChsTime,
   formatTime,
   formatNumber,
-  isNewDate
+  isNewDate,
+  throttle
 }

@@ -1,5 +1,6 @@
 @import "./colorui/icon.wxss";
 @import "./colorui/main.wxss";
+@import "./colorui/animation.wxss";
 @import "./assets/font/font.wxss";
 @import "./assets/icon/icon.wxss";
 

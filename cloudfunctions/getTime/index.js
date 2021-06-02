@@ -5,7 +5,6 @@ cloud.init()
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  console.log("定时任务触发了");
-  return event
-
+  const time = new Date()
+  return time
 }

@@ -23,8 +23,9 @@
 }
 
 .main>.content {
+  position: relative;
   width: 70%;
-  height: 900rpx;
+  height: 1000rpx;
   border: 2px solid white;
   display: flex;
   flex-direction: column;
@@ -78,4 +79,32 @@
 
 .sentence>.translation {
   margin-top: 20rpx;
+}
+
+.content>.sign {
+  position: absolute;
+  width: 120rpx;
+  height: 50rpx;
+  text-align: center;
+  line-height: 40rpx;
+  border: 1px solid white;
+  bottom: 30rpx;
+  right: 20rpx;
+}
+
+.hit {
+  -webkit-animation: hit 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+  animation: hit 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+@keyframes hit {
+  0% {
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+  }
+
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
 }

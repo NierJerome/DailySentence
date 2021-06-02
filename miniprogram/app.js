@@ -52,7 +52,6 @@ App({
   // 获取数据
   async getSentenceData() {
     let list = []
-    const db = wx.cloud.database()
 
     // 判断本地缓存是否有数据
     let dataList = wx.getStorageSync('dataList')
