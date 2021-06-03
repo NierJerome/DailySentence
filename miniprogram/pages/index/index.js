@@ -16,8 +16,12 @@ Page({
   async getDailyList(list) {
     let _this = this
     let dailyList = list.map((item, index, array) => {
-      
-      
+      if (index == array.length - 1) {
+        item.today = true
+      } else {
+        item.today = false
+      }
+
       return {
         ...item,
         index: index,

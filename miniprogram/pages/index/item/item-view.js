@@ -1,5 +1,15 @@
 // pages/index/item/item-view.js
 Component({
+  observers: {
+    "item": function (obj) {
+      if (obj && obj.today) {
+        this.setData({
+          signed: wx.getStorageSync('sign').signed || false
+        })
+      }
+    }
+  },
+
   // 允许组件采用全局样式
   options: {
     addGlobalClass: true
@@ -24,34 +34,48 @@ Component({
    * 组件的初始数据
    */
   data: {
-    isClick: false
+    isClick: false,
+    signed: false,
   },
+
 
   /**
    * 组件的方法列表
    */
   methods: {
-    handleSign: function () {
+    handleSign: async function () {
+      let _this = this
+      if (this.data.signed) {
+        return
+      }
       if (this.data.isClick) {
         return
       }
       this.setData({
         isClick: true
       })
-      var that = this;
-      that.setData({
-        animation: 'fade'
+      _this.setData({
+        animation: 'hit'
       })
-      wx.cloud.callFunction({
-        name: 'signData',
-        data: item,
-        success: (res) => {
-          console.log(res);
-        },
-        fail: (err) => {
-          console.log(err);
-        }
-      })
+      let item = this.data.item
+      let data = {
+        id: item.id,
+        time: item.time,
+        imageUrl: item.imageUrl,
+        text: item.text,
+        translation: item.translation
+      }
+      setTimeout(function () {
+        _this.setData({
+          animation: '',
+          isClick: false,
+          signed: true
+        })
+        wx.setStorageSync('sign', {
+          signed: true
+        })
+      }, 700)
+
       //  wx.cloud.callFunction({
       //       name: 'login',
       //       success: (res) => {
@@ -69,12 +93,27 @@ Component({
       //         })
       //       }
       //     })
-      setTimeout(function () {
-        that.setData({
-          animation: '',
-          isClick: false
-        })
-      }, 700)
+
+      await wx.cloud.callFunction({
+        name: 'signData',
+        data: data,
+        success: (res) => {
+          if (res.result.sign) {
+            wx.showToast({
+              title: '打卡成功',
+              icon: 'none',
+              duration: 1000
+            })
+          }
+        },
+        fail: (err) => {
+          wx.showToast({
+            title: "打卡失败了，请确认网络环境",
+            icon: 'none',
+            duration: 1000
+          })
+        }
+      })
     },
 
 

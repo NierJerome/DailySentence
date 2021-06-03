@@ -1,6 +1,6 @@
 <!--pages/index/item/item-view.wxml-->
 <view class="main" style="height:{{swiperHeight}}px">
-
+  <!-- <view></view> -->
   <image class="bg" style="height:{{swiperHeight}}px" src="{{item.imageUrl}}" mode="aspectFill"></image>
   <view class="opacityBg"></view>
   <view class="content" wx:if="{{item}}">
@@ -15,6 +15,6 @@
       <view class="text">{{item.text}}</view>
       <view class="translation">{{item.translation}}</view>
     </view>
-    <view class="sign animation-{{animation}}" id="container" bindtap="handleSign">打卡</view>
+    <view class="sign {{animation}} {{signed?'signed':''}}" wx:if="{{item.today}}" id="container" bindtap="handleSign">{{signed?'已打卡':'打卡'}}</view>
   </view>
 </view>

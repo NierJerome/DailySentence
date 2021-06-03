@@ -83,13 +83,21 @@
 
 .content>.sign {
   position: absolute;
-  width: 120rpx;
+  width: 130rpx;
   height: 50rpx;
   text-align: center;
-  line-height: 40rpx;
+  line-height: 45rpx;
+  font-size: 24rpx;
+  font-weight: 600;
   border: 1px solid white;
+  border-radius: 50rpx;
   bottom: 30rpx;
   right: 20rpx;
+}
+
+.content>.signed {
+  background: white;
+  color: black;
 }
 
 .hit {
