@@ -60,7 +60,7 @@ App({
       // 判断是否更新数据 使用缓存数据判断
       let lastItem = dataList[dataList.length - 1]
 
-      if (!tools.isNewDate(lastItem.time)) {
+      if (!tools.isToday(lastItem.time)) {
         list = await this.getData()
       } else {
         return

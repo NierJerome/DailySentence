@@ -35,16 +35,18 @@ const formatNumber = n => {
   return n[1] ? n : `0${n}`
 }
 
-const isNewDate = (date) => {
+const isToday = (date) => {
   //检测是否传值
   if (!date) {
     return
   }
-  date = new Date(Number(date));
-  let currentDate = new Date()
-  if (`${date.getFullYear()}${date.getMonth()}${date.getDate()}` == `${currentDate.getFullYear()}${currentDate.getMonth()}${currentDate.getDate()}`) {
+  const time = new Date()
+
+  if (Math.round(time.getTime() / 1000) - date < 86400) {
+    console.log("今日已获取");
     return 1
   } else {
+    console.log("今日未获取");
     return 0
   }
 
@@ -71,6 +73,6 @@ module.exports = {
   formatChsTime,
   formatTime,
   formatNumber,
-  isNewDate,
+  isToday,
   throttle
 }
