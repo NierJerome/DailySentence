@@ -112,6 +112,12 @@ Component({
             icon: 'none',
             duration: 1000
           })
+          this.setData({
+            signed: false
+          })
+          wx.removeStorage({
+            key: 'sign',
+          })
         }
       })
     },

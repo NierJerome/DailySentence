@@ -1,1 +1,33 @@
 /* pages/list/index.wxss */
+.main {
+  position: relative;
+  width: 100%;
+  background: #131124;
+}
+
+.main>.header {
+  width: 100%;
+  height: 160px;
+  transition: 1s;
+}
+
+.main>.hide {
+  height: 0;
+}
+
+.main>.body {
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+  background-color: white;
+}
+
+.scroll {
+  width: 100%;
+  height: 100%;
+}
+
+.scroll .scroll-item {
+  width: 100%;
+  height: 100px;
+  color: black;
+}
