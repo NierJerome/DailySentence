@@ -108,7 +108,7 @@ function getTime(time) {
     fullDate: `${year}${month>9?month:'0'+month}${date>9?date:'0'+date}`,
     fullDate_2: `${year}-${month>9?month:'0'+month}-${date>9?date:'0'+date}`,
     date: date,
-    time: Math.round((new Date(`${year} ${month>9?month:'0'+month} ${date>9?date:'0'+date}`)).getTime() / 1000) - 28800 // 当天0点的时间戳
+    time: Math.round((new Date(year, month - 1, date, 0, 0, 0)).getTime() / 1000) // 当天0点的时间戳
   }
 }
 
@@ -121,8 +121,14 @@ exports.main = async () => {
   const row = await db.collection('data').skip(ct.total - 1).get()
   // 判断当天数据是否获取
   if (Math.round(time.getTime() / 1000) - row.data[0].time < 86400) {
-    console.log("今日已获取");
-    return 1
+    return {
+      fulldate: time,
+      time: time.getTime(),
+      date: time.getDate(),
+      month: time.getMonth(),
+      hour: time.getHours(),
+      minutes: time.getMinutes()
+    }
   }
 
   //根据最新时间获取图片，句子
@@ -147,7 +153,8 @@ exports.main = async () => {
     }).then((res) => {
       return {
         res,
-        data
+        data,
+        
       }
     })
 }

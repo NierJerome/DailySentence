@@ -21,7 +21,7 @@ exports.main = async (event, context) => {
   let status
   let res = await db.collection('user')
     .where({
-      openid: wxContext.OPENID
+      _openid: wxContext.OPENID
     })
     .get({
       success: (res) => {
@@ -42,7 +42,7 @@ exports.main = async (event, context) => {
   return {
     event,
     status: status,
-    openid: wxContext.OPENID,
+    _openid: wxContext.OPENID,
     appid: wxContext.APPID,
     unionid: wxContext.UNIONID,
     env: wxContext.ENV,

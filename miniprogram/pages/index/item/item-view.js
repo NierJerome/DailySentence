@@ -1,14 +1,6 @@
 // pages/index/item/item-view.js
+const App = getApp()
 Component({
-  observers: {
-    "item": function (obj) {
-      if (obj && obj.today) {
-        this.setData({
-          signed: wx.getStorageSync('sign').signed || false
-        })
-      }
-    }
-  },
 
   // 允许组件采用全局样式
   options: {
@@ -35,7 +27,7 @@ Component({
    */
   data: {
     isClick: false,
-    signed: false,
+    signed: App.globalData.signed,
   },
 
 
@@ -51,13 +43,21 @@ Component({
       if (this.data.isClick) {
         return
       }
-      this.setData({
+      _this.setData({
         isClick: true
       })
       _this.setData({
         animation: 'hit'
       })
+      setTimeout(function () {
+        _this.setData({
+          animation: '',
+          isClick: false,
+          // signed: true
+        })
+      }, 700)
       let item = this.data.item
+      console.log(item);
       let data = {
         id: item.id,
         time: item.time,
@@ -65,34 +65,6 @@ Component({
         text: item.text,
         translation: item.translation
       }
-      setTimeout(function () {
-        _this.setData({
-          animation: '',
-          isClick: false,
-          signed: true
-        })
-        wx.setStorageSync('sign', {
-          signed: true
-        })
-      }, 700)
-
-      //  wx.cloud.callFunction({
-      //       name: 'login',
-      //       success: (res) => {
-      //         console.log(res);
-      //         console.log('[云函数] [login] user openid: ', res.result.openid, '是否已存在用户？',
-      //           res.result.status == 1 ? '[是]' : '[否]')
-      //         this.globalData.openid = res.result.openid
-      //         this.initialize(res.result.status)
-      //       },
-      //       fail: (err) => {
-      //         wx.showToast({
-      //           title: '网络错误',
-      //           icon: "none",
-      //           duration: 1000
-      //         })
-      //       }
-      //     })
 
       await wx.cloud.callFunction({
         name: 'signData',
@@ -118,5 +90,14 @@ Component({
 
 
   },
-
+  /**
+   * 生命周期
+   */
+  lifetimes:{
+    ready:function (params) {
+      this.setData({
+        signed:App.globalData.signed || false
+      })
+    }
+  }
 })

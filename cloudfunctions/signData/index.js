@@ -14,7 +14,7 @@ exports.main = async (event) => {
   //判断用户是否已打卡
   let item = await db.collection('signrecord').where(
     _.and([{
-      openid: _.eq(event.openid)
+      _openid: _.eq(wxContext.OPENID)
     }, {
       id: _.eq(event.id)
     }])
@@ -27,7 +27,7 @@ exports.main = async (event) => {
       item: item
     }
   }
-
+  console.log(event);
   //获取当前用户id，打卡项
   let data = {
     openId: wxContext.OPENID,
@@ -41,7 +41,6 @@ exports.main = async (event) => {
     return {
       sign: 1,
       res,
-      data
     }
   })
 }
