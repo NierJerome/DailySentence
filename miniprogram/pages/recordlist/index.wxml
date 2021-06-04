@@ -1,2 +1,10 @@
 <!--pages/list/index.wxml-->
-
+<view class="main" style="height: {{mainHeight}}px">
+  <view class="header {{toUp? '': 'hide'}}"></view>
+  <view class="body" style="height: {{toUp?mainHeight - 160:''}}px">
+    <scroll-view class="scroll" scroll-y="true" bindscrolltoupper="upper" scroll-into-view="{{toViewid}}"
+      enable-back-to-top="true" bindscroll="handleScroll">
+      <view class="scroll-item" wx:key="ss" wx:for="{{list}}" id="list{{index}}">{{item}}</view>
+    </scroll-view>
+  </view>
+</view>

@@ -4,6 +4,9 @@
 /* @import "./assets/font/font.wxss"; */
 @import "./assets/icon/icon.wxss";
 
+
+/* --ScreenHeight: */
+
 page {
   color: white;
   font-family: DIN;

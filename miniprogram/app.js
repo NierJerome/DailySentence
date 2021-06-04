@@ -1,9 +1,8 @@
 //app.js
 const tools = require("./untils")
-
-
 App({
   onLaunch: function () {
+    this.globalData.wHeight = wx.getSystemInfoSync().windowHeight
     // 初始化数据库
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
