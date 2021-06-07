@@ -1,2 +1,4 @@
 <!--pages/mine/index.wxml-->
-<text>pages/mine/index.wxml</text>
+<view class="container">
+  <custom-tab-bar inner-selected="{{2}}"></custom-tab-bar>
+</view>
