@@ -1,10 +1,27 @@
 <!--pages/list/index.wxml-->
 <view class="main" style="height: {{mainHeight}}px">
-  <view class="header {{toUp? '': 'hide'}}"></view>
-  <view class="body" style="height: {{toUp?mainHeight - 160:''}}px">
-    <scroll-view class="scroll" scroll-y="true" bindscrolltoupper="upper" scroll-into-view="{{toViewid}}"
-      enable-back-to-top="true" bindscroll="handleScroll">
-      <view class="scroll-item" wx:key="ss" wx:for="{{list}}" id="list{{index}}">{{item}}</view>
+  <view class="header {{toUp? '': 'hide'}}">
+    <view class="textBox">
+      <text>累计打卡</text>
+      <text class="day">{{1}}</text>
+      <text>天</text>
+    </view>
+
+  </view>
+  <view class="body" style="height: {{toUp?mainHeight - 160:mainHeight}}px">
+    <scroll-view id="scroll" class="scroll" enhanced="true" fast-deceleration="true" bounces="false"
+      scroll-with-animation="true" scroll-y="true" bindscrolltoupper="upper" upper-threshold="0"
+      scroll-into-view="{{toViewid}}" enable-back-to-top="true" bindscroll="handleScroll">
+      <!-- https://images.unsplash.com/photo-1621478492435-a6153fec2926?crop=top&w=1080&h=300&fit=crop -->
+      <view class="scroll-item" wx:key="ss" wx:for="{{list}}" id="list{{index}}">
+        <view class="dateBox">
+          <text class="day">03</text>
+          <text>六月2021</text>
+        </view>
+        <view class="sentenceBox">
+          <text>我不愿做任何人除了我自己。</text>
+        </view>
+      </view>
     </scroll-view>
   </view>
 </view>

@@ -8,32 +8,42 @@ Page({
   data: {
     toUp: true,
     scrollTop: 200,
-    toViewid:'list3'
+    toViewid: 'list3'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   upper: function (params) {
-    console.log(111);
-    let _this = this
-    _this.setData({
-      toUp: true
-    })
+    console.log(1);
+
   },
 
-  handleScroll:function (params) {
+  handleScroll: function (params) {
     let _this = this
-    // 获取当前滑动到的位置
 
-    // if(this.data.toUp){
-    //   _this.setData({
-    //     toUp: false
-    //   })
-    // }
+    const query = wx.createSelectorQuery()
+    query.select('#scroll').boundingClientRect()
+    query.select('#list0').boundingClientRect()
+    query.exec((res) => {
+      let scrollH = res[0].top
+      let itemH = res[1].top
+      if ((itemH - scrollH) < -80) {
+        _this.setData({
+          toUp: false
+        })
+      } else {
+        _this.setData({
+          toUp: true
+        })
+      }
+    })
+
+
   },
 
   onLoad: function (options) {
+
     let _this = this
     // 造一个列表数据
     let list = []
