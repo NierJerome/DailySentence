@@ -23,15 +23,18 @@ exports.main = async (event) => {
   })
   if (item.length) {
     return {
-      sign: 1,
       item: item
     }
   }
   console.log(event);
   //获取当前用户id，打卡项
   let data = {
-    openId: wxContext.OPENID,
-    ...event
+    _openid: wxContext.OPENID,
+    id: event.id,
+    imageUrl: event.imageUrl,
+    text: event.text,
+    time: event.time,
+    translation: event.translation
   }
   //加入数据库
 
@@ -39,7 +42,6 @@ exports.main = async (event) => {
     data: data
   }).then((res) => {
     return {
-      sign: 1,
       res,
     }
   })
