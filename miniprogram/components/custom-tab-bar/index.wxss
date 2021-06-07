@@ -1,0 +1,48 @@
+/* components/c-tab-bar/index.wxss */
+.tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: rgba(0, 0, 0, .3);
+  display: flex;
+}
+
+.tab-bar-item {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.tab-bar-item cover-image {
+  position: relative;
+  width: 27px;
+  height: 27px;
+  z-index: 9;
+}
+
+
+.tab-bar-item cover-view {
+  font-size: 15px;
+  text-align: center;
+}
+
+.tab-bar-item .active {
+  animation: scale .3s cubic-bezier(.33,.96,1,1.47);
+  transform-origin: center;
+  animation-fill-mode: forwards;
+}
+
+@keyframes scale {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(2.5);
+  }
+}

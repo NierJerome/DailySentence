@@ -1,0 +1,9 @@
+<!--components/c-tab-bar/index.wxml-->
+<cover-view class="tab-bar">
+  <cover-view wx:for="{{list}}" wx:key="index" class="tab-bar-item" data-path="{{item.pagePath}}" data-index="{{index}}"
+    bindtap="switchTab">
+    <cover-image src="{{innerSelected === index ? item.selectedIconPath : item.iconPath}}"></cover-image>
+    <cover-view style="color:{{item.color || color}} " class="{{selected == index?'active':''}}">{{item.text || '·'}}
+    </cover-view>
+  </cover-view>
+</cover-view>
