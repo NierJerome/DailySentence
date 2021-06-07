@@ -40,9 +40,6 @@ App({
       }
     })
 
-
-    // let list = this.getSentenceData()
-    // wx.setStorageSync('dataList', list)
   },
 
 
@@ -65,6 +62,8 @@ App({
       if (!tools.isToday(lastItem.time)) {
         list = await _this.getData()
       } else {
+        // 有缓存时查询签到
+        await this.querySign(dataList)
         return
       }
     } else {
@@ -74,15 +73,20 @@ App({
 
 
     // 查询用户签到信息
+    await this.querySign(list)
+    wx.setStorageSync('dataList', list)
+    return list
+
+  },
+
+  querySign: function (list) {
+    const _this = this
     const db = wx.cloud.database()
-    await db.collection('signrecord').where({
+    return db.collection('signrecord').where({
       id: list[list.length - 1].id
     }).get().then(res => {
       _this.globalData.signed = true
     })
-    wx.setStorageSync('dataList', list)
-    return list
-
   },
 
   // 获取数据

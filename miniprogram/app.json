@@ -11,19 +11,16 @@
     "backgroundColor": "#ffffff",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "云开发 QuickStart",
+    "navigationBarTitleText": "每日一句",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "custom": true,
     "list": [{
-      "pagePath": "pages/mine/index",
-      "text": "记录"
-    }, {
       "pagePath": "pages/index/index",
       "text": "每日一句"
     }, {
-      "pagePath": "pages/recordlist/index",
+      "pagePath": "pages/mine/index",
       "text": "我的"
     }]
   },
