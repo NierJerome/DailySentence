@@ -81,6 +81,15 @@
   margin-top: 20rpx;
 }
 
+.content>.record {
+  position: absolute;
+  padding: 10rpx;
+  width: 70rpx;
+  height: 70rpx;
+  bottom: 20rpx;
+  left: 50rpx;
+}
+
 .content>.sign {
   position: absolute;
   width: 130rpx;

@@ -15,6 +15,10 @@
       <view class="text">{{item.text}}</view>
       <view class="translation">{{item.translation}}</view>
     </view>
-    <view class="sign {{animation}} {{signed?'signed':''}}" wx:if="{{item.today}}" id="container" bindtap="handleSign">{{signed?'已打卡':'打卡'}}</view>
+    <view class="record" bindtap="toRecord">
+      <image src="../../../assets/images/recordList.png" mode="widthFix"></image>
+    </view>
+    <view class="sign {{animation}} {{signed?'signed':''}}" wx:if="{{item.today}}" id="container" bindtap="handleSign">
+      {{signed?'已打卡':'打卡'}}</view>
   </view>
 </view>

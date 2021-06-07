@@ -35,6 +35,14 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    // 导航签到记录
+    toRecord: function (params) {
+      wx.navigateTo({
+        url: '/pages/recordlist/index',
+      })
+    },
+
+    // 签到
     handleSign: async function () {
       let _this = this
       if (this.data.signed) {
@@ -53,7 +61,7 @@ Component({
         _this.setData({
           animation: '',
           isClick: false,
-          // signed: true
+          signed: true
         })
       }, 700)
       let item = this.data.item
@@ -99,10 +107,10 @@ Component({
   /**
    * 生命周期
    */
-  lifetimes:{
-    ready:function (params) {
+  lifetimes: {
+    ready: function (params) {
       this.setData({
-        signed:App.globalData.signed || false
+        signed: App.globalData.signed || false
       })
     }
   }

@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "swiper-screen": "../../components/swiper-screen/index",
-    "item-view": "./item/item-view"
+    "item-view": "./item/item-view",
+    "custom-tab-bar": "/components/custom-tab-bar/index"
   }
 }

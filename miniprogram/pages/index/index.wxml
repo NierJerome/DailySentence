@@ -15,4 +15,5 @@
   <view class="tab next" catchtap="onClickNext">
     <icon class="iconfont icon-xuanzeqixiayige" style="font-size:60rpx"></icon>
   </view>
+  <custom-tab-bar inner-selected="{{0}}"></custom-tab-bar>
 </view>
