@@ -1,5 +1,7 @@
 {
   "usingComponents": {
     "custom-tab-bar": "/components/custom-tab-bar/index"
-  }
+  },
+  "disableScroll": true
+
 }
