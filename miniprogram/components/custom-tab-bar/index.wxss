@@ -32,7 +32,7 @@
 }
 
 .tab-bar-item .active {
-  animation: scale .3s cubic-bezier(.33,.96,1,1.47);
+  animation: scale .3s cubic-bezier(.33,.96,1,2);
   transform-origin: center;
   animation-fill-mode: forwards;
 }
