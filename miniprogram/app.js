@@ -14,31 +14,23 @@ App({
       })
 
     }
-    wx.login({
-      timeout: 30000,
+
+    wx.cloud.callFunction({
+      name: 'login',
       success: (res) => {
-        // 登录后获取openid（用户唯一标识）
-        wx.cloud.callFunction({
-          name: 'login',
-          success: (res) => {
-            console.log('[云函数] [login] user openid: ', res.result._openid, '是否已存在用户？',
-              res.result.status == 1 ? '[是]' : '[否]')
-            this.globalData.openid = res.result._openid
-            this.initialize(res.result.status)
-          },
-          fail: (err) => {
-            wx.showToast({
-              title: '网络错误',
-              icon: "none",
-              duration: 1000
-            })
-          }
-        })
+        console.log(res);
+        this.globalData.openid = res.result.userInfo._openid
+        wx.setStorageSync('userInfo', res.result.userInfo)
       },
       fail: (err) => {
-        console.log(err);
+        wx.showToast({
+          title: '网络错误',
+          icon: "none",
+          duration: 1000
+        })
       }
     })
+
 
   },
 
@@ -51,9 +43,6 @@ App({
 
     // 判断本地缓存是否有数据
     let dataList = wx.getStorageSync('dataList')
-
-
-
     if (dataList.length) {
       // if (0) {
       // 判断是否更新数据 使用缓存数据判断
@@ -63,7 +52,7 @@ App({
         list = await _this.getData()
       } else {
         // 有缓存时查询签到
-        await this.querySign(dataList)
+        await this.querySign(lastItem.id)
         return
       }
     } else {
@@ -73,25 +62,25 @@ App({
 
 
     // 查询用户签到信息
-    await this.querySign(list)
+    await this.querySign(list[list.length - 1].id)
     wx.setStorageSync('dataList', list)
     return list
 
   },
 
-  querySign: function (list) {
-    const _this = this
+  querySign: function (id) {
     const db = wx.cloud.database()
     return db.collection('signrecord').where({
-      id: list[list.length - 1].id
+      id: id
     }).get().then(res => {
-      _this.globalData.signed = true
+      if (res.data.length) {
+        this.globalData.signed = true
+      }
     })
   },
 
   // 获取数据
   getData() {
-    // wx.cloud.callFunction({name:'getData'}) [云函数]
     // 数据库
     const db = wx.cloud.database()
     return db.collection('data')
@@ -107,40 +96,8 @@ App({
       })
   },
 
-  // 初始化数据
-  initialize(userStatus) {
-    // 初始化数据库
-    const db = wx.cloud.database()
-    // 判断是否为已注册用户
-    if (userStatus == 1) {
-      // --Y调出用户信息
-      db.collection('user').where({
-          _openid: this.globalData.openid
-        })
-        .get({
-          success: (res) => {
-            // 将获取的用户信息存入缓存
-            wx.setStorageSync('userInfo', res.data)
-          }
-        })
-    } else if (userStatus == 0) {
-      // --N新建用户信息
-      db.collection('user').add({
-        data: {
-          _openid: this.globalData.openid
-        }
-      }).then((res) => {
-        console.log(res);
-        console.log("新建成功");
-      })
-    }
-
-
-    // 初始化用户数据
-  },
-
-
   globalData: {
+    openid: '',
     userInfo: null,
     signed: false
   }

@@ -6,7 +6,7 @@ const cloud = require('wx-server-sdk')
 // 初始化 cloud
 cloud.init({
   // API 调用都保持和云函数当前所在环境一致
-  env: cloud.DYNAMIC_CURRENT_ENV
+  env: 'dev-cloud-4gsfo39c022ee2d2'
 })
 const db = cloud.database()
 
@@ -16,35 +16,34 @@ const db = cloud.database()
  * event 参数包含小程序端调用传入的 data
  * 
  */
-exports.main = async (event, context) => {
+exports.main = async (event) => {
   const wxContext = cloud.getWXContext()
-  let status
   let res = await db.collection('user')
     .where({
       _openid: wxContext.OPENID
     })
-    .get({
-      success: (res) => {
-        console.log(res);
-      }
-    })
-  if (!res.data.length) {
-    status = 0
+    .get()
+  if (res.data.length) {
+    // --Y调出用户信息
+    return {
+      userInfo:res.data[0],
+      status: 1
+    }
   } else {
-    status = 1
+    // --N新建用户信息
+    db.collection('user').add({
+      data: {
+        _openid: wxContext.OPENID
+      }
+    }).then((res) => {
+      console.log(res);
+    })
+    return {
+      userInfo: {
+        _openid:wxContext.OPENID
+      },
+      status : 0
+    }
   }
-
-  // 可执行其他自定义逻辑
-  // console.log 的内容可以在云开发云函数调用日志查看
-
-  // 获取 WX Context (微信调用上下文)，包括 OPENID、APPID、及 UNIONID（需满足 UNIONID 获取条件）等信息
-
-  return {
-    event,
-    status: status,
-    _openid: wxContext.OPENID,
-    appid: wxContext.APPID,
-    unionid: wxContext.UNIONID,
-    env: wxContext.ENV,
-  }
+  
 }
