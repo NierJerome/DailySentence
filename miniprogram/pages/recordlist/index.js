@@ -8,14 +8,14 @@ Page({
   data: {
     toUp: true,
     scrollTop: 200,
-    toViewid: 'list3'
+    toViewid: 'list3',
+    page: 0, // 控制当前获取的页数
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   upper: function (params) {
-    console.log(1);
 
   },
 
@@ -42,17 +42,90 @@ Page({
 
   },
 
-  onLoad: function (options) {
+  getSignedData: function () {
+    const db = wx.cloud.database()
+    return db.collection('signrecord')
+      .limit(10)
+      .orderBy('time', 'desc')
+      .skip(10 * this.data.page)
+      .get()
+      .then(res => {
+        console.log(res);
+        return res.data
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  },
 
-    let _this = this
+  onLoad: async function (options) {
+
+    const _this = this
+
+    // 获取签到记录
+    let list = await _this.getSignedData()
+    console.log(list);
+    let renderList = list.map((item) => {
+      let time = new Date(item.time * 1000)
+      let date = time.getDate() > 9 ? time.getDate() : `0${time.getDate()}`
+      let year = time.getFullYear()
+      let month
+      switch (time.getMonth()) {
+        case 0:
+          month = '一'
+          break;
+        case 1:
+          month = '二'
+          break;
+        case 2:
+          month = '三'
+          break;
+        case 3:
+          month = '四'
+          break;
+        case 4:
+          month = '五'
+          break;
+        case 5:
+          month = '六'
+          break;
+        case 6:
+          month = '七'
+          break;
+        case 7:
+          month = '八'
+          break;
+        case 8:
+          month = '九'
+          break;
+        case 9:
+          month = '十'
+          break;
+        case 10:
+          month = '十一'
+          break;
+        case 11:
+          month = '十二'
+          break;
+      }
+      let tempUrl = item.imageUrl
+      // https://images.unsplash.com/photo-1621478492435-a6153fec2926?crop=top&w=1080&h=300&fit=crop
+
+      let imageUrl = `${(tempUrl).slice(0,(tempUrl.indexOf('?')))}?crop=center&w=720&h=300&fit=crop`
+      return {
+        text: item.text,
+        date: date,
+        month: month,
+        year: year,
+        translation: item.translation,
+        imageUrl: imageUrl
+      }
+    })
     // 造一个列表数据
-    let list = []
-    for (let i = 0; i < 30; i++) {
-      list.push(`这是第${i+1}条数据。`)
-    }
-    this.setData({
+
+    _this.setData({
       mainHeight: app.globalData.wHeight,
-      list: list
+      list: renderList
     })
   },
 
