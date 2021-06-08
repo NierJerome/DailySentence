@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/mine/index",
     "pages/recordlist/index",
-    "pages/loading/index"
+    "pages/loading/index",
+    "pages/imageList/index"
 
   ],
   "window": {
@@ -20,6 +21,9 @@
       "pagePath": "pages/index/index",
       "text": "每日一句"
     }, {
+      "pagePath": "pages/imageList/index",
+      "text": "图片库"
+    },{
       "pagePath": "pages/mine/index",
       "text": "我的"
     }]

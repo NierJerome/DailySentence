@@ -15,7 +15,7 @@ Component({
       iconPath: "/assets/images/index.png",
       selectedIconPath: "/assets/images/index.png"
     }, {
-      pagePath: "/pages/message/index",
+      pagePath: "/pages/imageList/index",
       text: "",
       iconPath: "/assets/images/list.png",
       selectedIconPath: "/assets/images/list.png"

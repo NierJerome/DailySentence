@@ -1,4 +1,4 @@
-/* pages/mine/index.wxss */
+/* pages/imageList/index.wxss */
 .container{
   position: relative;
 }
