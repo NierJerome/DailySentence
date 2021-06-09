@@ -12,16 +12,17 @@
     <scroll-view id="scroll" class="scroll" enhanced="true" fast-deceleration="true" bounces="false"
       scroll-with-animation="true" scroll-y="true" bindscrolltoupper="upper" upper-threshold="0"
       scroll-into-view="{{toViewid}}" enable-back-to-top="true" bindscroll="handleScroll">
-      <view class="scroll-item" wx:key="ss" wx:for="{{list}}" id="list{{index}}" style="background-image:url({{item.imageUrl}})">
+      <view class="scroll-item" wx:key="ss" wx:for="{{list}}" id="list{{index}}"
+        style="background-image:url({{item.imageUrl}})">
         <view class="opacity">
-        <view class="dateBox">
-          <text class="day">{{item.date}}</text>
-          <text>{{item.month}}月{{item.year}}</text>
+          <view class="dateBox">
+            <text class="day">{{item.date}}</text>
+            <text>{{item.month}}月{{item.year}}</text>
+          </view>
+          <view class="sentenceBox">
+            <text>{{item.translation}}</text>
+          </view>
         </view>
-        <view class="sentenceBox">
-          <text>{{item.translation}}</text>
-        </view>
-      </view>
       </view>
     </scroll-view>
   </view>
