@@ -60,6 +60,8 @@
   display: flex;
   border-radius: 8px;
   overflow: hidden;
+  background-color: #e4fbff;
+
 }
 
 .scroll-item:last-child{

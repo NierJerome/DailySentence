@@ -18,7 +18,6 @@ App({
     wx.cloud.callFunction({
       name: 'login',
       success: (res) => {
-        console.log(res);
         this.globalData.openid = res.result.userInfo._openid
         wx.setStorageSync('userInfo', res.result.userInfo)
       },
@@ -60,7 +59,6 @@ App({
       list = await _this.getData()
     }
 
-
     // 查询用户签到信息
     await this.querySign(list[list.length - 1].id)
     wx.setStorageSync('dataList', list)
@@ -80,16 +78,32 @@ App({
   },
 
   // 获取数据
-  getData() {
+  getData: async function () {
+    let list = []
     // 数据库
+    const db = wx.cloud.database()
+    let count = await db.collection('data').where({
+      "id": db.command.gt(0)
+    }).count();
+    for (let i = 0; i < count.total; i += 20) {
+      list = list.concat(await this.queryData(i))
+      console.log(i, list);
+    }
+    return list
+  },
+
+  // 请求数据
+  queryData: function (skip) {
     const db = wx.cloud.database()
     return db.collection('data')
       .where({
-        id: db.command.gt(0)
+        "id": db.command.gt(0)
       })
       .orderBy('id', 'asc')
+      .skip(skip)
       .get()
       .then(res => {
+        console.log(res);
         return res.data
       }).catch((err) => {
         console.log('获取失败', err);

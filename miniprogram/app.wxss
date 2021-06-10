@@ -8,6 +8,7 @@
 /* --ScreenHeight: */
 
 page {
+  background-color: white;
   color: white;
   font-family: DIN;
   font-size: 30rpx;

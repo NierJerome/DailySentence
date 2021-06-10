@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 2573308 */
-  src: url('//at.alicdn.com/t/font_2573308_jmwr7a0qpjj.woff2?t=1622020231107') format('woff2'),
-       url('//at.alicdn.com/t/font_2573308_jmwr7a0qpjj.woff?t=1622020231107') format('woff'),
-       url('//at.alicdn.com/t/font_2573308_jmwr7a0qpjj.ttf?t=1622020231107') format('truetype');
+  src: url('//at.alicdn.com/t/font_2573308_eydnvb1snh.woff2?t=1623315128637') format('woff2'),
+       url('//at.alicdn.com/t/font_2573308_eydnvb1snh.woff?t=1623315128637') format('woff'),
+       url('//at.alicdn.com/t/font_2573308_eydnvb1snh.ttf?t=1623315128637') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,22 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-jiantou_xiangxia:before {
+  content: "\eb0a";
+}
+
+.icon-lishijilu_o:before {
+  content: "\eb7b";
+}
+
+.icon-jiazai_shuang_o:before {
+  content: "\eb78";
+}
+
+.icon-youjian_o:before {
+  content: "\ebca";
 }
 
 .icon-xiangzuo:before {

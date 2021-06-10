@@ -3,7 +3,7 @@
   <view class="header {{toUp? '': 'hide'}}">
     <view class="textBox">
       <text>累计打卡</text>
-      <text class="day">{{'∞'}}</text>
+      <text class="day">{{signDays}}</text>
       <text>天</text>
     </view>
 

@@ -10,6 +10,7 @@ Page({
     scrollTop: 200,
     toViewid: 'list3',
     page: 0, // 控制当前获取的页数
+    signDays: 0, // 签到天数
   },
 
   /**
@@ -59,9 +60,16 @@ Page({
   },
 
   onLoad: async function (options) {
+    const db = wx.cloud.database()
 
     const _this = this
+    let count = await db.collection('signrecord').where({
+      '_openid':app.globalData.openid
+    }).count();
 
+    this.setData({
+      signDays: count.total
+    })
     // 获取签到记录
     let list = await _this.getSignedData()
     console.log(list);
