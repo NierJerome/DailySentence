@@ -1,8 +1,32 @@
 <!--pages/mine/index.wxml-->
 <view class="container">
-  <image class="image" src="https://images.unsplash.com/photo-1515567307232-835b1e3660a6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMzQ0MDF8MHwxfHJhbmRvbXx8fHx8fHx8fDE2MjI0NTEyMTk&ixlib=rb-1.2.1&q=80&w=1080" mode="aspectFill">
-  </image>
-  <text class="text">设置页面 暂未实现</text>
-  <custom-tab-bar inner-selected="{{2}}"></custom-tab-bar>
+  <view class="header">
+    <view class="userinfo-avatar">
+      <image bindtap="getUserProfile" src="{{userInfo.avatarUrl }}" mode="widthFix"></image>
+    </view>
+    <text class="userinfo-nickname">{{userInfo.nickName || "匿名"}}</text>
+  </view>
+  <view class="middle">岁月，是无常的美好。</view>
 
+  <view class="body">
+    <view class="items-title">普通设置</view>
+    <view class="items">
+      <view class="item" hover-class="item-hover">
+        <icon class="iconfont icon-jiazai_shuang_o" style="font-size:50rpx"></icon>
+        <text>清除缓存</text>
+        <icon class="iconfont icon-xuanzeqixiayige" style="font-size:30rpx;"></icon>
+      </view>
+      <view class="item" hover-class="item-hover">
+        <icon class="iconfont icon-lishijilu_o" style="font-size:50rpx"></icon>
+        <text>关于</text>
+        <icon class="iconfont icon-xuanzeqixiayige" style="font-size:30rpx"></icon>
+      </view>
+      <view class="item" hover-class="item-hover">
+        <icon class="iconfont icon-youjian_o" style="font-size:50rpx"></icon>
+        <text>意见反馈</text>
+        <icon class="iconfont icon-xuanzeqixiayige" style="font-size:30rpx"></icon>
+      </view>
+    </view>
+  </view>
+  <custom-tab-bar inner-selected="{{2}}"></custom-tab-bar>
 </view>
