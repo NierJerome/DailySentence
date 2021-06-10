@@ -1,8 +1,34 @@
 <!--pages/imageList/index.wxml-->
 <view class="container">
-  <image class="image" src="https://images.unsplash.com/photo-1517811409552-396f829138a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMzQ0MDF8MHwxfHJhbmRvbXx8fHx8fHx8fDE2MjI0NTEyMTk&ixlib=rb-1.2.1&q=80&w=1080" mode="aspectFill">
-  </image>
-  <text class="text">图片库页面 暂未实现</text>
+  <view class="header">图片库</view>
+  <view class="masonry">
+    <!-- 第一列 -->
+    <view class="column">
+      <div class="item" wx:for="{{masonry.col_1}}" wx:key="ss" data-imgUrl="{{item}}" bindlongpress="showImage">
+        <image src="{{item}}" mode="widthFix"></image>
+      </div>
+    </view>
+    <!-- 第二列 -->
+    <view class="column">
+      <div class="item" wx:for="{{masonry.col_2}}" wx:key="ss" data-imgUrl="{{item}}" bindlongpress="showImage">
+        <image src="{{item}}" mode="widthFix"></image>
+      </div>
+    </view>
+    <!-- 第三列 -->
+    <view class="column">
+      <div class="item" wx:for="{{masonry.col_3}}" wx:key="ss" data-imgUrl="{{item}}" bindlongpress="showImage">
+        <image src="{{item}}" mode="widthFix"></image>
+      </div>
+    </view>
+  </view>
+  <view class="cu-modal {{modalName=='Image'?'show':''}}" >
+    <view class="dialog" >
+      <image src="{{currentImage}}" mode="widthFix">
+        <view class="downImage" catchtap="downloadImage">
+          <icon class="iconfont icon-jiantou_xiangxia icon" style="font-size:40rpx"></icon>
+        </view>
+      </image>
+    </view>
+  </view>
   <custom-tab-bar inner-selected="{{1}}"></custom-tab-bar>
-
 </view>
